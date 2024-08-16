@@ -9,17 +9,14 @@ use Illuminate\Contracts\Database\Query\Builder;
 
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
+     /**
+     * Display a paginated list of categories.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $query = Category::query()
-            ->when(request('search'), function(Builder $query, $search) {
-                return $query->where('name', 'like', '%'.$search);
-            });
-
-        return $query->simplePaginate();
+        $perPage = $request->input('per_page', 15); // Số bản ghi mỗi trang, mặc định là 15
+        $categories = Category::paginate($perPage);
+        return response()->json($categories);
     }
 
     /**
@@ -67,4 +64,5 @@ class CategoryController extends Controller
 
         return $category;
     }
+    
 }

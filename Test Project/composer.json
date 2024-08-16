@@ -9,7 +9,9 @@
         "dedoc/scramble": "^0.11.10",
         "doctrine/dbal": "^4.0",
         "laravel/framework": "^11.9",
-        "laravel/tinker": "^2.9"
+        "laravel/telescope": "^5.2",
+        "laravel/tinker": "^2.9",
+        "livewire/livewire": "^3.5"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
