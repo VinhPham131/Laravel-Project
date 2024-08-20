@@ -2,20 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-Route::prefix('v1')->group(function () {
-    Route::apiResource('categories', \App\Http\Controllers\CategoryController::class);
-    Route::apiResource('products', \App\Http\Controllers\ProductController::class);
-});
-
-use App\Http\Controllers\API\CategoryController;
-Route::get('/categories', [CategoryController::class, 'index']);
-
-use App\Http\Controllers\API\ProductController;
-Route::get('/products', [ProductController::class, 'index']);
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,3 +14,11 @@ Route::get('/products', [ProductController::class, 'index']);
 */
 
 Route::get('/', [App\Http\Controllers\HomepageController::class, 'index'])->name('homepage');
+
+Route::get('/checkout', [App\Http\Controllers\CheckoutController::class, 'index'])->name('checkout.index');
+
+Route::post('/checkout', [App\Http\Controllers\CheckoutController::class, 'store'])->name('checkout.store');
+
+Route::get('/checkout/{order}', [App\Http\Controllers\CheckoutController::class, 'show'])->name('checkout.show');
+
+
