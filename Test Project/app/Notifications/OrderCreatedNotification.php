@@ -7,6 +7,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
+
 class OrderCreatedNotification extends Notification
 {
     use Queueable;
@@ -36,6 +37,11 @@ class OrderCreatedNotification extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
+        Log::info('Creating mail message for order notification.', [
+            'order_id' => $this->order->id,
+            'email' => $notifiable->email,
+        ]);
+
         return (new MailMessage)
             ->greeting('Dear '.$this->order->full_name.',')
             ->subject('New Order Received | Code '.$this->order->code)
@@ -48,7 +54,7 @@ class OrderCreatedNotification extends Notification
     /**
      * Get the array representation of the notification.
      *
-     * @return array<string, mixed>
+     * @return array<string, m  ixed>
      */
     public function toArray(object $notifiable): array
     {
